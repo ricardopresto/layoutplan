@@ -1,8 +1,7 @@
 <template>
   <main class="main">
-    <div class="inner" @click="$emit('update', index)">
-      <span>{{ row }}</span>
-      <span>{{ column }}</span>
+    <div class="inner" @click="select">
+      <span>{{ index }}</span>
     </div>
   </main>
 </template>
@@ -11,18 +10,37 @@
   export default {
     name: 'room',
     props: {
-      row: {
-        type: Number,
-        required: true,
+      index: {
+        type: String,
       },
-      column: {
-        type: Number,
-        required: true,
+      orientation: {
+        type: Number
+      },
+      brickColor: {
+        type: String
+      },
+      topWallDoor: {
+        type: Object
+      },
+      bottomWallDoor: {
+        type: Object
+      },
+      leftWallDoor: {
+        type: Object
+      },
+      rightWallDoor: {
+        type: Object
       }
     },
+    emits: ['select'],
     data() {
       return {
-        index: `${this.row}-${this.column}`,
+        roomIndex: this.index,
+      }
+    },
+    methods: {
+      select() {
+        this.$emit('select', this.roomIndex);
       }
     }
   }

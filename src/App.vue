@@ -1,32 +1,43 @@
 <template>
   <main class="main">
     <div class="grid">
-      <div class="row" v-for="row in rows" :key="row.index">
-        <div class="column" v-for="column in columns" :key="column.index">
-          <Room :row="row" :column="column" @update="updateRoom"/>
-        </div>
-      </div>
-      <div class="panel">
-        <button @click="synchronise">Synchronise</button>
-        <button :disabled="disableGenerate" @click="generateTemplate">Generate template</button>
+      <div v-for="room in json.roomData" >
+          <Room 
+            :index="room.index"
+            :orientation="room.orientation"
+            :brickColor="room.brickColor"
+            :topWallDoor="room.topWallDoor"
+            :bottomWallDoor="room.bottomWallDoor"
+            :leftWallDoor="room.leftWallDoor"
+            :rightWallDoor="room.rightWallDoor"
+            @select="selectRoom"
+          />
       </div>
     </div>
+    <ControlPanel
+      :selectedRoom="selectedRoom"
+      @synchronise="synchronise"
+      @generate="generateTemplate"
+      @update-room="update"
+    />
   </main>
 </template>
 
 <script>
   import Room from './components/Room.vue';
+  import ControlPanel from './components/ControlPanel.vue';
 
   export default {
     components: {
-      Room
+      Room,
+      ControlPanel
     },
     data() {
       return {
         json: {},
         rows: null,
         columns: null,
-        disableGenerate: true,
+        selectedRoom: null,
       }
     },
     mounted() {
@@ -90,13 +101,16 @@
         });
       },
 
-      updateRoom(data) {
-        const selectedRoom = this.json.roomData.find(room => {
+      selectRoom(data) {
+        this.selectedRoom = this.json.roomData.find(room => {
           return room.index == data
         });
-        selectedRoom.orientation = 0;
-        console.log('room ' + data + ' updated');
-        this.synchronise();
+        console.log(this.selectedRoom.index + ' selected')
+      },
+
+      update(data) {
+        console.log(data)
+        this.selectedRoom.orientation = data;
       }
     }
   }
@@ -108,25 +122,10 @@
   flex-direction: row;
 }
 
-.row {
-  display: flex;
-  flex-direction: row;
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-column-gap: 0px;
+  grid-row-gap: 0px; 
 }
-
-.column {
-  display: flex;
-  flex-direction: column;
-}
-
-.panel
- {
-  display: flex;
-  flex-direction: column;
-  width: 200px;
- }
-
- button {
-  height: 30px;
-  margin: 10px;
- }
 </style>
