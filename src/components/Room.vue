@@ -1,6 +1,6 @@
 <template>
   <main class="main">
-    <div class="inner">
+    <div class="inner" @click="$emit('update', index)">
       <span>{{ row }}</span>
       <span>{{ column }}</span>
     </div>
@@ -22,7 +22,7 @@
     },
     data() {
       return {
-        //
+        index: `${this.row}-${this.column}`,
       }
     }
   }
