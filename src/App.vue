@@ -110,7 +110,8 @@
 
       update(data) {
         console.log(data)
-        this.selectedRoom.orientation = data;
+        this.selectedRoom.orientation = data.orientation;
+        this.selectedRoom.topWallDoor = data.topWallDoor;
       }
     }
   }
