@@ -49,6 +49,14 @@
       },
     },
 
+    watch: {
+      json() {
+        this.selectedRoom = this.json.roomData.find(room => {
+          return room.index == this.selectedRoomIndex;
+        });
+      }
+    },
+
     mounted() {
       this.readFile();
     },
@@ -118,10 +126,9 @@
         })
         .then(response => response.json())
         .then(data => {
-          const json = JSON.parse(data);
-          this.json = json;
-          this.rows = json.meta.rows;
-          this.columns = json.meta.columns;
+          this.json = JSON.parse(data);
+          this.rows = this.json.meta.rows;
+          this.columns = this.json.meta.columns;
         });
       },
 

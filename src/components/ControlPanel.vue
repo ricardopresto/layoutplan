@@ -55,14 +55,14 @@
     watch: {
       selectedRoom() {
         this.orientation = this.selectedRoom.orientation;
-        this.topWallDoorStart = this.selectedRoom.topWallDoor.size?.[0] ?? null;
-        this.topWallDoorEnd = this.selectedRoom.topWallDoor.size?.[1] ?? null;
-        this.bottomWallDoorStart = this.selectedRoom.bottomWallDoor.size?.[0] ?? null;
-        this.bottomWallDoorEnd = this.selectedRoom.bottomWallDoor.size?.[1] ?? null;
-        this.leftWallDoorStart = this.selectedRoom.leftWallDoor.size?.[0] ?? null;
-        this.leftWallDoorEnd = this.selectedRoom.leftWallDoor.size?.[1] ?? null;
-        this.rightWallDoorStart = this.selectedRoom.rightWallDoor.size?.[0] ?? null;
-        this.rightWallDoorEnd = this.selectedRoom.rightWallDoor.size?.[1] ?? null;
+        this.topWallDoorStart = this.selectedRoom.topWallDoor?.size?.[0] ?? null;
+        this.topWallDoorEnd = this.selectedRoom.topWallDoor?.size?.[1] ?? null;
+        this.bottomWallDoorStart = this.selectedRoom.bottomWallDoor?.size?.[0] ?? null;
+        this.bottomWallDoorEnd = this.selectedRoom.bottomWallDoor?.size?.[1] ?? null;
+        this.leftWallDoorStart = this.selectedRoom.leftWallDoor?.size?.[0] ?? null;
+        this.leftWallDoorEnd = this.selectedRoom.leftWallDoor?.size?.[1] ?? null;
+        this.rightWallDoorStart = this.selectedRoom.rightWallDoor?.size?.[0] ?? null;
+        this.rightWallDoorEnd = this.selectedRoom.rightWallDoor?.size?.[1] ?? null;
       }
     },
     methods: {
