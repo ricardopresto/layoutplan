@@ -99,7 +99,7 @@
       getLeftDoor() {
         if (this.leftWallDoorStart > 0 && this.leftWallDoorEnd > 0 ) {
           return [
-            this.lefWallDoorStart,
+            this.leftWallDoorStart,
             this.leftWallDoorEnd,
           ]
         }
