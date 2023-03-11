@@ -1,6 +1,6 @@
 <template>
-  <main class="main">
-    <div class="inner" @click="select">
+  <main :class="['main', {selected: selected}]" @click="select">
+    <div class="inner">
       <span>{{ index }}</span>
     </div>
   </main>
@@ -30,6 +30,9 @@
       },
       rightWallDoor: {
         type: Object
+      },
+      selected: {
+        type: Boolean
       }
     },
     emits: ['select'],
@@ -56,8 +59,12 @@
   align-items: center;
   margin: 5px;
   color: #fff;
+  border: 2px solid #fff;
 }
 
+.selected {
+  border: 2px solid #f00;
+}
 .inner {
   width: 100px;
   height: 100px;

@@ -1,11 +1,26 @@
 <template>
   <div class="panel">
-    <label for="orientation">Orientation</label>
-    <input type="number" name="orientation" v-model="orientation">
-    <label for="topWallDoor">Top wall door</label>
+    <label>Orientation</label>
+    <input type="number" v-model="orientation">
+    <label>Top wall door</label>
     <div class="wallgroup">
-      <input type="number" name="topWallDoor" v-model="topWallDoorStart">
-      <input type="number" name="topWallDoor" v-model="topWallDoorEnd">
+      <input type="number" v-model="topWallDoorStart">
+      <input type="number" v-model="topWallDoorEnd">
+    </div>
+    <label>Bottom wall door</label>
+    <div class="wallgroup">
+      <input type="number" v-model="bottomWallDoorStart">
+      <input type="number" v-model="bottomWallDoorEnd">
+    </div>
+    <label>Left wall door</label>
+    <div class="wallgroup">
+      <input type="number" v-model="leftWallDoorStart">
+      <input type="number" v-model="leftWallDoorEnd">
+    </div>
+    <label>Right wall door</label>
+    <div class="wallgroup">
+      <input type="number" v-model="rightWallDoorStart">
+      <input type="number" v-model="rightWallDoorEnd">
     </div>
     <button @click="update">Update room</button>
     <button @click="$emit('synchronise')">Synchronise all</button>
@@ -25,50 +40,81 @@
     },
     data() {
       return {
-        disableGenerate: true,
+        disableGenerate: false,
         orientation: null,
-        topWallDoor: {},
-        bottomWallDoor: {},
-        leftWallDoor: {},
-        rightWallDoor: {},
+        topWallDoorStart: null,
+        topWallDoorEnd: null,
+        bottomWallDoorStart: null,
+        bottomWallDoorEnd: null,
+        leftWallDoorStart: null,
+        leftWallDoorEnd: null,
+        rightWallDoorStart: null,
+        rightWallDoorEnd: null,
       }
     },
     watch: {
       selectedRoom() {
         this.orientation = this.selectedRoom.orientation;
         this.topWallDoorStart = this.selectedRoom.topWallDoor.size?.[0] ?? null;
-        this.topWallDoorEnd = this.selectedRoom.topWallDoor.size?.[1] ?? 0;
-        this.bottomWallDoor = this.selectedRoom.bottomWallDoor;
-        this.leftWallDoor = this.selectedRoom.leftWallDoor;
-        this.rightWallDoor = this.selectedRoom.rightWallDoor;
+        this.topWallDoorEnd = this.selectedRoom.topWallDoor.size?.[1] ?? null;
+        this.bottomWallDoorStart = this.selectedRoom.bottomWallDoor.size?.[0] ?? null;
+        this.bottomWallDoorEnd = this.selectedRoom.bottomWallDoor.size?.[1] ?? null;
+        this.leftWallDoorStart = this.selectedRoom.leftWallDoor.size?.[0] ?? null;
+        this.leftWallDoorEnd = this.selectedRoom.leftWallDoor.size?.[1] ?? null;
+        this.rightWallDoorStart = this.selectedRoom.rightWallDoor.size?.[0] ?? null;
+        this.rightWallDoorEnd = this.selectedRoom.rightWallDoor.size?.[1] ?? null;
       }
     },
     methods: {
       update() {
         this.$emit('update-room', {
           orientation: this.orientation,
-          topWallDoor: this.getTopDoor() 
+          topWallDoorSize: this.getTopDoor(),
+          bottomWallDoorSize: this.getBottomDoor(),
+          leftWallDoorSize: this.getLeftDoor(),
+          rightWallDoorSize: this.getRightDoor(),
         })
       },
 
       getTopDoor() {
         if (this.topWallDoorStart > 0 && this.topWallDoorEnd > 0 ) {
-          return {
-            size: [
+          return [
             this.topWallDoorStart,
             this.topWallDoorEnd,
-            ],
-            toRoom: this.getRoomToTop(this.selectedRoom.index),
-          };
+          ]
         }
-
-        return {};
+        return null;
       },
 
-      getRoomToTop(index) {
-        const row = Number(index.substring(0, 1));
-        return `${row - 1}${index.substring(1)}`;
-      }
+      getBottomDoor() {
+        if (this.bottomWallDoorStart > 0 && this.bottomWallDoorEnd > 0 ) {
+          return [
+            this.bottomWallDoorStart,
+            this.bottomWallDoorEnd,
+          ]
+        }
+        return null;
+      },
+
+      getLeftDoor() {
+        if (this.leftWallDoorStart > 0 && this.leftWallDoorEnd > 0 ) {
+          return [
+            this.lefWallDoorStart,
+            this.leftWallDoorEnd,
+          ]
+        }
+        return null;
+      },
+
+      getRightDoor() {
+        if (this.rightWallDoorStart > 0 && this.rightWallDoorEnd > 0 ) {
+          return [
+            this.rightWallDoorStart,
+            this.rightWallDoorEnd,
+          ]
+        }
+        return null;
+      },
     }
   }
 </script>
