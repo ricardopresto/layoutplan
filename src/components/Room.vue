@@ -140,25 +140,25 @@
       brickStyle() {
         if (this.orientation == 0) {
           return {
-            top: '30px',
+            top: '35px',
             left: '10px',
             flexDirection: 'column',
           }
         } else if (this.orientation == 180) {
           return {
-            bottom: '30px',
+            bottom: '35px',
             left: '10px',
             flexDirection: 'column',
           }
         } else if (this.orientation == 90) {
           return {
-            right: '30px',
+            right: '35px',
             top: '10px',
             flexDirection: 'row',
           }
         } else if (this.orientation == 270) {
           return {
-            left: '30px',
+            left: '35px',
             top: '10px',
             flexDirection: 'row',
           }
@@ -168,12 +168,12 @@
         if (this.orientation == 0 || this.orientation == 180) {
           return {
           width: '179px',
-          height: '12px',
+          height: '11px',
           }
         }
          else if (this.orientation == 90 || this.orientation == 270) {
           return {
-          width: '12px',
+          width: '11px',
           height: '179px',
           }
         }
