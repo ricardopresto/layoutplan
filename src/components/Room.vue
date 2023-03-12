@@ -210,10 +210,12 @@
 .wall {
   position: absolute;
   background-color: rgb(85, 85, 85);
+  z-index: 1;
 }
 
 .base {
   background-color: lightgray;
+  z-index: 0;
 }
 .wall.horizontal {
   width: 200px;
