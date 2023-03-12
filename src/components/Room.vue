@@ -1,5 +1,5 @@
 <template>
-  <main :class="['main', {selected: selected}]" @click="select">
+  <main :class="['main', {selected: selected, hide: hide}]" @click="select">
       <div :class="['wall', 'horizontal', 'topwall', {base: orientation == 180}]">
         <div v-for="x in 20" class="brick"></div>
       </div>
@@ -62,6 +62,17 @@
       }
     },
     computed: {
+      hide() {
+        if (
+          this.topWallDoor.size ||
+          this.bottomWallDoor.size ||
+          this.leftWallDoor.size ||
+          this.rightWallDoor.size
+        ) {
+          return false;
+        }
+        return true
+      },
       topDoor() {
         return [
           this.topWallDoor.size?.[0],
@@ -73,6 +84,7 @@
           return {
             left: `${(this.topDoor[0] - 1) * 10}px`,
             width: `${(this.topDoor[1] - this.topDoor[0] + 1) * 10}px`,
+            height: '10px',
             top: '0'
           }
         }
@@ -88,6 +100,7 @@
           return {
             left: `${(this.bottomDoor[0] - 1) * 10}px`,
             width: `${(this.bottomDoor[1] - this.bottomDoor[0] + 1) * 10}px`,
+            height: '10px',
             bottom: '0'
           }
         }
@@ -103,6 +116,7 @@
           return {
             top: `${(this.leftDoor[0] - 1) * 10}px`,
             height: `${(this.leftDoor[1] - this.leftDoor[0] + 1) * 10}px`,
+            width: '10px',
             left: '0'
           }
         }
@@ -118,6 +132,7 @@
           return {
             top: `${(this.rightDoor[0] - 1) * 10}px`,
             height: `${(this.rightDoor[1] - this.rightDoor[0] + 1) * 10}px`,
+            width: '10px',
             right: '0'
           }
         }
@@ -181,15 +196,17 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 5px;
   color: #000;
-  border: 2px solid #fff;
+  border: 3px solid #fff;
   font-size: 20px;
 }
 .selected {
-  border: 2px solid #f00;
+  border: 3px solid #f00;
 }
 
+.hide {
+  opacity: 0.5;
+}
 .wall {
   position: absolute;
   background-color: gray;
@@ -234,7 +251,6 @@
 }
 
 .door-style {
-  height: 10px;
   background-color: aqua;
   position: absolute;
 }

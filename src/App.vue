@@ -64,8 +64,8 @@
 
     methods: {
       generateTemplate() {
-        const setRows = 3;
-        const setColumns = 3;
+        const setRows = 6;
+        const setColumns = 6;
         const template = {};
         const roomData = [];
         template.meta = {
@@ -103,6 +103,7 @@
           }
         }
         template.roomData = roomData;
+        console.log(template);
         this.writeFile(template);
       },
 
@@ -219,8 +220,8 @@
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(6, 1fr);
   grid-column-gap: 0px;
-  grid-row-gap: 0px; 
+  grid-row-gap: 0px;
 }
 </style>

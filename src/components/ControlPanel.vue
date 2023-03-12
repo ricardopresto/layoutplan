@@ -42,7 +42,7 @@
     },
     data() {
       return {
-        disableGenerate: true,
+        disableGenerate: false,
         orientation: null,
         brickRows: null,
         topWallDoorStart: null,
@@ -126,9 +126,16 @@
 
 <style>
 .panel {
+  position: fixed;
   display: flex;
   flex-direction: column;
-  width: 200px;
+  width: 140px;
+  background-color: #fff;
+  top: 0;
+  right: 0;
+  padding: 5px;
+  border: 1px solid grey;
+  border-radius: 10px;
  }
 
  label {
@@ -137,11 +144,13 @@
 
  input {
   margin: 5px;
-  width: 80px;
+  width: 50px;
  }
 
  button {
+  width: 120px;
   height: 30px;
   margin: 10px;
+  font-size: 12px;
  }
 </style>
