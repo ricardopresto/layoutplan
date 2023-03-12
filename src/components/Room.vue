@@ -255,6 +255,7 @@
 .door-style {
   background-color: aqua;
   position: absolute;
+  z-index: 2;
 }
 
 .bricks {
