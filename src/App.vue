@@ -5,6 +5,7 @@
           <Room 
             :index="room.index"
             :orientation="room.orientation"
+            :brickRows="room.brickRows"
             :brickColor="room.brickColor"
             :topWallDoor="room.topWallDoor"
             :bottomWallDoor="room.bottomWallDoor"
@@ -79,6 +80,7 @@
             roomData.push({
               'index': index,
               'orientation': 0,
+              'brickRows': 3,
               'brickColor': '',
               'hitBricks': [],
               'topWallDoor': {
@@ -139,6 +141,7 @@
       update(data) {
         console.log(data)
         this.selectedRoom.orientation = data.orientation;
+        this.selectedRoom.brickRows = data.brickRows;
         this.setTopWall(data.topWallDoorSize);
         this.setBottomWall(data.bottomWallDoorSize);
         this.setLeftWall(data.leftWallDoorSize);

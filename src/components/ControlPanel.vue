@@ -2,6 +2,8 @@
   <div class="panel">
     <label>Orientation</label>
     <input type="number" v-model="orientation" min="0" max="270" step="90">
+    <label>Brick rows</label>
+    <input type="number" v-model="brickRows" min="1" max="3">
     <label>Top wall door</label>
     <div class="wallgroup">
       <input type="number" v-model="topWallDoorStart" min="1" max="20">
@@ -42,6 +44,7 @@
       return {
         disableGenerate: true,
         orientation: null,
+        brickRows: null,
         topWallDoorStart: null,
         topWallDoorEnd: null,
         bottomWallDoorStart: null,
@@ -55,6 +58,7 @@
     watch: {
       selectedRoom() {
         this.orientation = this.selectedRoom.orientation;
+        this.brickRows = this.selectedRoom.brickRows;
         this.topWallDoorStart = this.selectedRoom.topWallDoor?.size?.[0] ?? null;
         this.topWallDoorEnd = this.selectedRoom.topWallDoor?.size?.[1] ?? null;
         this.bottomWallDoorStart = this.selectedRoom.bottomWallDoor?.size?.[0] ?? null;
@@ -69,6 +73,7 @@
       update() {
         this.$emit('update-room', {
           orientation: this.orientation,
+          brickRows: this.brickRows,
           topWallDoorSize: this.getTopDoor(),
           bottomWallDoorSize: this.getBottomDoor(),
           leftWallDoorSize: this.getLeftDoor(),

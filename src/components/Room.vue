@@ -3,19 +3,22 @@
       <div :class="['wall', 'horizontal', 'topwall', {base: orientation == 180}]">
         <div v-for="x in 20" class="brick"></div>
       </div>
-      <div :style="topDoorStyle"></div>
+      <div :style="topDoorStyle" class="door-style"></div>
       <div :class="['wall', 'horizontal', 'bottomwall', {base: orientation == 0}]">
         <div v-for="x in 20" class="brick"></div>
       </div>
-      <div :style="bottomDoorStyle"></div>
+      <div :style="bottomDoorStyle" class="door-style"></div>
       <div :class="['wall', 'vertical', 'leftwall', {base: orientation == 90}]">
         <div v-for="x in 20" class="brick"></div>
       </div>
-      <div :style="leftDoorStyle"></div>
+      <div :style="leftDoorStyle" class="door-style"></div>
       <div :class="['wall', 'vertical', 'rightwall', {base: orientation == 270}]">
         <div v-for="x in 20" class="brick"></div>
       </div>
-      <div :style="rightDoorStyle"></div>
+      <div :style="rightDoorStyle" class="door-style"></div>
+      <div :style="brickStyle" class="bricks">
+        <div :style="brickRowStyle" class="brick-row" v-for="x in brickRows"></div>
+      </div>
       <span>{{ index }}</span><br>
   </main>
 </template>
@@ -28,6 +31,9 @@
         type: String,
       },
       orientation: {
+        type: Number
+      },
+      brickRows: {
         type: Number
       },
       brickColor: {
@@ -67,9 +73,6 @@
           return {
             left: `${(this.topDoor[0] - 1) * 10}px`,
             width: `${(this.topDoor[1] - this.topDoor[0] + 1) * 10}px`,
-            height: '10px',
-            backgroundColor: 'aqua',
-            position: 'absolute',
             top: '0'
           }
         }
@@ -85,9 +88,6 @@
           return {
             left: `${(this.bottomDoor[0] - 1) * 10}px`,
             width: `${(this.bottomDoor[1] - this.bottomDoor[0] + 1) * 10}px`,
-            height: '10px',
-            backgroundColor: 'aqua',
-            position: 'absolute',
             bottom: '0'
           }
         }
@@ -103,9 +103,6 @@
           return {
             top: `${(this.leftDoor[0] - 1) * 10}px`,
             height: `${(this.leftDoor[1] - this.leftDoor[0] + 1) * 10}px`,
-            width: '10px',
-            backgroundColor: 'aqua',
-            position: 'absolute',
             left: '0'
           }
         }
@@ -121,13 +118,51 @@
           return {
             top: `${(this.rightDoor[0] - 1) * 10}px`,
             height: `${(this.rightDoor[1] - this.rightDoor[0] + 1) * 10}px`,
-            width: '10px',
-            backgroundColor: 'aqua',
-            position: 'absolute',
             right: '0'
           }
         }
       },
+      brickStyle() {
+        if (this.orientation == 0) {
+          return {
+            top: '30px',
+            left: '10px',
+            flexDirection: 'column',
+          }
+        } else if (this.orientation == 180) {
+          return {
+            bottom: '30px',
+            left: '10px',
+            flexDirection: 'column',
+          }
+        } else if (this.orientation == 90) {
+          return {
+            right: '30px',
+            top: '10px',
+            flexDirection: 'row',
+          }
+        } else if (this.orientation == 270) {
+          return {
+            left: '30px',
+            top: '10px',
+            flexDirection: 'row',
+          }
+        }
+      },
+      brickRowStyle() {
+        if (this.orientation == 0 || this.orientation == 180) {
+          return {
+          width: '179px',
+          height: '12px',
+          }
+        }
+         else if (this.orientation == 90 || this.orientation == 270) {
+          return {
+          width: '12px',
+          height: '179px',
+          }
+        }
+      }
     },
     methods: {
       select() {
@@ -196,5 +231,20 @@
   width: 8px;
   height: 8px;
   border: 1px solid #ccc;
+}
+
+.door-style {
+  height: 10px;
+  background-color: aqua;
+  position: absolute;
+}
+
+.bricks {
+  position: absolute;
+  display: flex;
+}
+.brick-row {
+  border: 1px solid #ccc;
+  background-color:orangered;
 }
 </style>
