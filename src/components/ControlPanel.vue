@@ -1,29 +1,29 @@
 <template>
   <div class="panel">
     <label>Orientation</label>
-    <input type="number" v-model="orientation">
+    <input type="number" v-model="orientation" min="0" max="270" step="90">
     <label>Top wall door</label>
     <div class="wallgroup">
-      <input type="number" v-model="topWallDoorStart">
-      <input type="number" v-model="topWallDoorEnd">
+      <input type="number" v-model="topWallDoorStart" min="1" max="20">
+      <input type="number" v-model="topWallDoorEnd" min="1" max="20">
     </div>
     <label>Bottom wall door</label>
     <div class="wallgroup">
-      <input type="number" v-model="bottomWallDoorStart">
-      <input type="number" v-model="bottomWallDoorEnd">
+      <input type="number" v-model="bottomWallDoorStart" min="1" max="20">
+      <input type="number" v-model="bottomWallDoorEnd" min="1" max="20">
     </div>
     <label>Left wall door</label>
     <div class="wallgroup">
-      <input type="number" v-model="leftWallDoorStart">
-      <input type="number" v-model="leftWallDoorEnd">
+      <input type="number" v-model="leftWallDoorStart" min="1" max="20">
+      <input type="number" v-model="leftWallDoorEnd" min="1" max="20">
     </div>
     <label>Right wall door</label>
     <div class="wallgroup">
-      <input type="number" v-model="rightWallDoorStart">
-      <input type="number" v-model="rightWallDoorEnd">
+      <input type="number" v-model="rightWallDoorStart" min="1" max="20">
+      <input type="number" v-model="rightWallDoorEnd" min="1" max="20">
     </div>
     <button @click="update">Update room</button>
-    <button @click="$emit('synchronise')">Synchronise all</button>
+    <button @click="$emit('overwrite')">Overwrite file</button>
     <button :disabled="disableGenerate" @click="$emit('generate')">Generate template</button>
   </div>
 </template>
@@ -31,7 +31,7 @@
 <script>
   export default {
     name: 'control-panel',
-    emits: ['generate', 'synchronise', 'update-room'],
+    emits: ['generate', 'overwrite', 'update-room'],
     props: {
       selectedRoom: {
         type: Object,
@@ -40,7 +40,7 @@
     },
     data() {
       return {
-        disableGenerate: false,
+        disableGenerate: true,
         orientation: null,
         topWallDoorStart: null,
         topWallDoorEnd: null,
@@ -124,6 +124,15 @@
   display: flex;
   flex-direction: column;
   width: 200px;
+ }
+
+ label {
+  margin-top: 10px;
+ }
+
+ input {
+  margin: 5px;
+  width: 80px;
  }
 
  button {

@@ -17,7 +17,7 @@
     </div>
     <ControlPanel
       :selectedRoom="selectedRoom"
-      @synchronise="synchronise"
+      @overwrite="overwrite"
       @generate="generateTemplate"
       @update-room="update"
     />
@@ -102,12 +102,10 @@
         }
         template.roomData = roomData;
         this.writeFile(template);
-        this.readFile();
       },
 
-      synchronise() {
+      overwrite() {
         this.writeFile(this.json);
-        this.readFile();
       },
 
       writeFile(data) {
