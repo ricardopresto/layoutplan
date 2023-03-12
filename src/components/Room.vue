@@ -209,7 +209,7 @@
 }
 .wall {
   position: absolute;
-  background-color: gray;
+  background-color: rgb(85, 85, 85);
 }
 
 .base {
